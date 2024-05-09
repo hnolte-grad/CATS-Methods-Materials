@@ -21,7 +21,7 @@
 % Threshold defining the minimum magnitude (default is 1) of a tailbeat (MagThresh).
 % Threshold (default is 10) used to compare the area under the curve for the upstroke and downstroke of a tailbeat to ensure that it is not too top- or bottom-heavy (ClarityThresh).
 
-function [FlukingOverlay Tailbeats] = TailbeatDetect(InertialData,fs,Depth,Pitch,Roll,Heading,SurfaceThresh,Speed,DurThresh,HeightThresh,MagThresh,ClarityThresh, Lowpass, Highpass) % need switch to tell if gyro or accl for InertialData
+function [FlukingOverlay, Tailbeats] = TailbeatDetect(InertialData,fs,Depth,Pitch,Roll,Heading,SurfaceThresh,Speed,DurThresh,HeightThresh,MagThresh,ClarityThresh, Lowpass, Highpass) % need switch to tell if gyro or accl for InertialData
 
 NaNs = find(isnan(InertialData)==1); % This finds all of the nan positions, making it easier to align the inertial sensing data with the depth and speed data, if using either.
 InertialData(NaNs,:) = []; % If you have not removed NaNs from your inertial sensing data, this will do that for you.

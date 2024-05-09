@@ -43,14 +43,14 @@ disp('Section completed')
 % you want to read in a TAG GUIDE for tag on and tag off times.
 
 dur = 15; % break the video up into chunks of length dur seconds to ensure progress and avoid crashes.  Smaller numbers use less memory
-folder = 'E://CATS//tag_data_raw//'; % optional- just gives you a place to start looking for your data files
-vid4k = true; % set to false if using older HD resolution CATS video or if you have audio only in CATS raw format
+folder = 'C:\\01_Work\\1Project Home\\1Research\\TAGSTUFF\\_temp data store\\tag_data_raw\\'; % optional- just gives you a place to start looking for your data files
+vid4k = false; % set to false if using older HD resolution CATS video or if you have audio only in CATS raw format
 % set to true if there are are no audio files to read.
 readaudiofiles = true; % set to false if there is no audio data or if you are rerunning this script due to an interruption and have already created the AudioData folder and populated it with wav and audio.mat files
 
 
 % these will be less commonly adjusted
-audioonly = false; % set to true for tags that do not have video (currently only works if you have wav files, if you only have ".raw" versions of audio files and no video files, we will have to make some adjustments still to ensure data is converted at the right sample rate.
+audioonly = true; % set to true for tags that do not have video (currently only works if you have wav files, if you only have ".raw" versions of audio files and no video files, we will have to make some adjustments still to ensure data is converted at the right sample rate.
 readtimestamps = true; % if there are embeded timestamps on the video.  If simpleread, only read timestamps at the end of a section and compare to the video time
 simpleread = true; % newer videos with accurate initial timestamps (to the ms). If false, reads timestamps from every frame and tries to estimate the bad frame reads
 timewarn = 0.1; % since typical data is downsampled to 10 Hz, use this as a threshold for accuracy of the video timestamps
@@ -98,7 +98,7 @@ disp('Section 1 completed');
 % variables to set
 decfac = 5; %decimation factor (e.g. decimate 50 Hz data in "data" to 10 Hz data with a decfac of 5)
 % Can set "folder" below to start looking for files in a specific place on your computer
-folder = 'D:\Tag Data\Dtags\3s\ONR Energetics of Exposure\ONR proposal\DATA\Beaked Whales\tag_data_raw/'; % folder in the drive where the cal files are located (and where you want to look for files) %'Users//Dave//Documents//Programs//MATLAB//Tagging//CATS cal';%
+folder = 'C:\\01_Work\\1Project Home\\1Research\\TAGSTUFF\\cals\\'; % folder in the drive where the cal files are located (and where you want to look for files) %'Users//Dave//Documents//Programs//MATLAB//Tagging//CATS cal';%
 
 % import files
 global fileloc filename
@@ -253,8 +253,8 @@ tagon = gettagon(data.Pressure,ofs,data.Date(1)+data.Time(1)+timedif/24,[data.Ac
 %video and the data). This may or may not be the future default until the
 %processor speeds of CATS tags are sufficient to handle video/data time
 %synchs independently.
-synchusingvidtimestamps = true; % for newer videos where timestamp from data is imprinted on video accurately (CHECK THIS BEFORE SWITCHING THIS FLAG TO TRUE, RECOMMEND USING HEADER FILE TO IDENTIFY SURFACINGS FOR MORE ACCURATE SYNCHRONIZATIONS)
-nocam = false; %false; % set to true if this is a data only tag. If there is just audio, set to true.  Will have to set audon independently
+synchusingvidtimestamps = false; % for newer videos where timestamp from data is imprinted on video accurately (CHECK THIS BEFORE SWITCHING THIS FLAG TO TRUE, RECOMMEND USING HEADER FILE TO IDENTIFY SURFACINGS FOR MORE ACCURATE SYNCHRONIZATIONS)
+nocam = true; %false; % set to true if this is a data only tag. If there is just audio, set to true.  Will have to set audon independently
 audioonly = false; % set to true if tag has no camera but does have audio
 
 if CellNum<4; x = input('Previous cell has not been completed, continue anyway? 1 = yes, 2 = no');
@@ -720,8 +720,8 @@ end
 
 
 % set threshold parameters
-minDepth = 5;
-minPitch = 45;
+minDepth = 2;
+minPitch = 30;
 % speedEnds = speedper(:,2);
 minSpeed = 1;
 % speedEnds([1 4 5 end-1:end]) = [];
